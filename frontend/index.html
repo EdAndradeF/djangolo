@@ -27,7 +27,7 @@
 <!--                });-->
 
 $(".button").click(function(){
-  $.get("http://127.0.0.1:8000/api/item/", function(data, status){
+  $.get("http://127.0.0.1:8000/api/item", function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
   });
 });
