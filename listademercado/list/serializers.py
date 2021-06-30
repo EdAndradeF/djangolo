@@ -14,7 +14,7 @@ class ListaItemSerializer(ModelSerializer):
 
 class ListaItensListaField(serializers.Field):
     def to_representation(self, value):
-        objeto1 = value.all().values('item__nome', "pk")
+        objeto1 = value.all().values('item__nome', "id")
         #objeto1 = ListaItemSerializer(value, many=True)
         return objeto1
 
@@ -27,7 +27,7 @@ class ListaSerializer(ModelSerializer):
     class Meta:
         model = Lista
         fields = (
-            'pk',
+            'id',
             'nome',
             'user',
             'itens_lista',
@@ -44,13 +44,11 @@ class ListaSerializer(ModelSerializer):
         if not instance.nome == validated_data['nome']:
             instance.nome = validated_data['nome']
 
-        querylist = {}
+        querylist = []
         for query in ListaItem.objects.filter(lista_id=instance.id):
-            querylist[query.id] = query.item_id
+            querylist.append(query.id)
 
-
-        upitens = {}
-        ret = []
+        upitens = []
         for item in self.initial_data['itens_lista']:
             if type(item) == dict:
                 item = item['item__nome']
@@ -58,21 +56,21 @@ class ListaSerializer(ModelSerializer):
 
             if _item is None:
                 _item = Item.objects.create(nome=item)
+
+            upitens.append(_item.id)
+            u = upitens.index(_item.id)
+            if len(upitens) <= len(querylist):
+                i = ListaItem.objects.get(id=querylist[u])
+                i.delete()
+                ListaItem.objects.create(lista_id=instance.pk, item=_item)
+            else:
                 _item = ListaItem.objects.create(lista_id=instance.pk, item=_item)
-                upitens[_item.id] = _item.item_id
 
-
-
-
-
-            upitens[_item.item_id] = _item.item
-            ret.append(_item)
-
-        for idlista, iditem in querylist.items():
-            if iditem not in upitens:
-                idlista.delete()
-
-        return ret
+        if len(querylist) > len(upitens):
+            for u in range(len(upitens), len(querylist)-1):
+                i = ListaItem.objects.get(id=querylist[u])
+                i.delete()
+        return instance
 
     def create(self, validated_data):
         #resposta = super().create(validated_data)

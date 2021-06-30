@@ -27,6 +27,6 @@ class ListaItem(models.Model):
     quantidade = models.IntegerField(default=1)
 
     def __str__(self):
-        return f'{self.pk} {self.item_id} {self.lista_id}'
+        return f'Id{self.pk}Item{self.item_id}Lista{self.lista_id}'
 
 
