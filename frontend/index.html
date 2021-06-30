@@ -19,18 +19,15 @@
         </form>
 
         <script>
-<!--            $.ajax({-->
-<!--                url: "http://127.0.0.1:8000/api/item/",-->
-<!--                method: "get",-->
-<!--                success: success, wyhra-->
-<!--                dataType: dataType-->
-<!--                });-->
-
-$(".button").click(function(){
-  $.get("http://127.0.0.1:8000/api/item", function(data, status){
-    alert("Data: " + data + "\nStatus: " + status);
-  });
-});
+            $(".button").click(function(){
+              $.get("http://127.0.0.1:8000/api/item", function(data){
+                alert(
+                "Nome do item: " + data[0].nome +
+                "\nmarca: " + data[0].marca +
+                "\nmedida: " + data[0].medida
+                );
+              });
+            });
         </script>
     </body>
 </html>
