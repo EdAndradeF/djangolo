@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <title>Feliz Aniversário!</title>
+    </head>
+    <body>
+        <div style="background-color: black; height: 50px; margin: -10px;"></div>
+        <div style="text-align: center;">
+            <label>
+                <h2>Feliz Aniversário
+                    <a style="color: black; text-decoration: none;" href="https://www.dell.com/support/order-status/pt-br/order-detail?v=Z2enh2YFs%2BVBHy26UDBz0w%3D%3D&src=home">
+                        Ednhooooooo!
+                    </a>
+                </h2>
+            </label>
+        </div>
+        <div style="text-align: center; height: 100%; width:100%; background-color:black;">
+            <img style="width: 75%" src="{{ MEDIA_URL}}image.jpg" />
+        </div>
+        <br/>
+        <script>
+            $("#class_asd").click(function(){
+              $.get("http://127.0.0.1:8000/api/item", function(data){
+                alert(
+                "Nome do item: " + data[0].nome +
+                "\nmarca: " + data[0].marca +
+                "\nmedida: " + data[0].medida
+                );
+              });
+            });
+        </script>
+    </body>
+</html>
