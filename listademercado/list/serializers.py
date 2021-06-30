@@ -40,13 +40,12 @@ class ListaSerializer(ModelSerializer):
         return resposta
 
     def update(self, instance, validated_data):
-        #resposta = super().update(instance, validated_data)
-        if not instance.nome == validated_data['nome']:
-            instance.nome = validated_data['nome']
+        resposta = super().update(instance, validated_data)
+
 
         querylist = []
         for query in ListaItem.objects.filter(lista_id=instance.id):
-            querylist.append(query.id)
+            querylist.append(query.item.id)
 
         upitens = []
         for item in self.initial_data['itens_lista']:
