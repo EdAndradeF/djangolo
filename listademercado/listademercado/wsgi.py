@@ -1,5 +1,5 @@
 """
-WSGI config for djangolibre project.
+WSGI config for listademercado project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangolibre.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'listademercado.settings')
 
 application = get_wsgi_application()

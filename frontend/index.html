@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <label>formulario de item</label>
+        <form action="http://127.0.0.1:8000/api/item/" method="post">
+            <input placeholder="nome do item" type="text" name="nome" required minlength="1" maxlength="50" />
+            <br><select name="marca" >
+            <option value="1">sadia </option>
+        </select>
+
+            <br/><input type="button" value="enviar" class="button" id="button" />
+
+        </form>
+
+        <script>
+<!--            $.ajax({-->
+<!--                url: "http://127.0.0.1:8000/api/item/",-->
+<!--                method: "get",-->
+<!--                success: success, wyhra-->
+<!--                dataType: dataType-->
+<!--                });-->
+
+$(".button").click(function(){
+  $.get("http://127.0.0.1:8000/api/item/", function(data, status){
+    alert("Data: " + data + "\nStatus: " + status);
+  });
+});
+        </script>
+    </body>
+</html>
