@@ -40,35 +40,34 @@ class ListaSerializer(ModelSerializer):
         return resposta
 
     def update(self, instance, validated_data):
-        resposta = super().update(instance, validated_data)
+        super().update(instance, validated_data)
 
-
-        querylist = []
+        querylist = {}
         for query in ListaItem.objects.filter(lista_id=instance.id):
-            querylist.append(query.item.id)
+            querylist[query.id] = query.item.id
 
+        ignoritem = {}
         upitens = []
         for item in self.initial_data['itens_lista']:
             if type(item) == dict:
+                if item['id'] in querylist.keys():
+                    _item = Item.objects.filter(nome=item['item__nome']).first()
+                    ignoritem[item['id']] = _item.id
+                    continue
                 item = item['item__nome']
+
             _item = Item.objects.filter(nome=item).first()
 
             if _item is None:
                 _item = Item.objects.create(nome=item)
-
             upitens.append(_item.id)
-            u = upitens.index(_item.id)
-            if len(upitens) <= len(querylist):
-                i = ListaItem.objects.get(id=querylist[u])
-                i.delete()
-                ListaItem.objects.create(lista_id=instance.pk, item=_item)
-            else:
-                _item = ListaItem.objects.create(lista_id=instance.pk, item=_item)
 
-        if len(querylist) > len(upitens):
-            for u in range(len(upitens), len(querylist)-1):
-                i = ListaItem.objects.get(id=querylist[u])
-                i.delete()
+            ListaItem.objects.create(lista_id=instance.pk, item=_item)
+
+        for idlist in querylist.keys():
+            if idlist not in ignoritem.keys():
+                ListaItem.objects.get(id=idlist).delete()
+
         return instance
 
     def create(self, validated_data):
@@ -78,6 +77,7 @@ class ListaSerializer(ModelSerializer):
             nome=validated_data['nome'],
             user=validated_data['user'],
         )
+        #if self.initial_data['itens_lista']   ___________:
         for item in self.initial_data['itens_lista']:
             #created, item_criado = Item.object.get_or_create(nome=item)
             _item = Item.objects.filter(nome=item).first()
