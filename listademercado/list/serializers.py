@@ -71,8 +71,21 @@ class ListaSerializer(ModelSerializer):
         return instance
 
     def create(self, validated_data):
-        #resposta = super().create(validated_data)
+        resposta = super().create(validated_data)
 
+        # lista = Lista.objects.create(
+        #     nome=validated_data['nome'],
+        #     user=validated_data['user'],
+        # )
+        # for item in self.initial_data['itens_lista']:
+        #     #created, item_criado = Item.object.get_or_create(nome=item)
+        #     _item = Item.objects.filter(nome=item).first()
+        #     if _item is None:
+        #         _item = Item.objects.create(nome=item)
+        #
+        #     ListaItem.objects.create(lista=lista, item=_item)
+
+<<<<<<< HEAD
         lista = Lista.objects.create(
             nome=validated_data['nome'],
             user=validated_data['user'],
@@ -87,3 +100,6 @@ class ListaSerializer(ModelSerializer):
             ListaItem.objects.create(lista=lista, item=_item)
 
         return lista #resposta
+=======
+        return resposta
+>>>>>>> b7f96341b7c552edc50d95b95bbee9907466f02d

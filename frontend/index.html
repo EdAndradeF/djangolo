@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
         <meta charset="UTF-8">
         <title>Title</title>
     </head>
@@ -10,21 +9,39 @@
         <label>formulario de item</label>
         <form action="http://127.0.0.1:8000/api/item/" method="post">
             <input placeholder="nome do item" type="text" name="nome" required minlength="1" maxlength="50" />
-            <br><select name="marca" >
-            <option value="1">sadia </option>
-        </select>
-
-            <br/><input type="button" value="enviar" class="button" id="button" />
-
+            <br>
+            <select name="marca" >
+                {% for marca in marcas %}
+                    <option value="{{ marca.id }}">{{ marca.nome }}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            <input type="submit" value="enviar formulario" />
         </form>
 
+
+<!--        <p> fora do dormulario</p>-->
+<!--        <input type="button" value="pegar todo os itens" id="pegar_itens" />-->
+<!--        <br>-->
+<!--        <input type="button" value="pegar todo as marcas" id="pegar_marcas" />-->
+
+
         <script>
-            $(".button").click(function(){
+            $("#pegar_itens").click(function(){
               $.get("http://127.0.0.1:8000/api/item", function(data){
-                alert(
-                "Nome do item: " + data[0].nome +
-                "\nmarca: " + data[0].marca +
-                "\nmedida: " + data[0].medida
+                console.log(
+                    "\nNome do item: " + data[0].nome +
+                    "\nNome do item: " + data[1].nome +
+                    "\nNome do item: " + data[2].nome
+                );
+              });
+            });
+
+            $("#pegar_marcas").click(function(){
+              $.get("http://127.0.0.1:8000/api/marca", function(data){
+                console.log(
+                    "\nNome da marca: " + data[0].nome +
+                    "\nNome da marca: " + data[1].nome
                 );
               });
             });
