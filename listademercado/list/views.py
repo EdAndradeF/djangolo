@@ -8,6 +8,7 @@ class ListaViewSet(ModelViewSet):
     queryset = Lista.objects.all()
     serializer_class = ListaSerializer
 
+
 class ListaItemViewSet(ModelViewSet):
     queryset = ListaItem.objects.all()
     serializer_class = ListaItemSerializer
