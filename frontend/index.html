@@ -3,23 +3,29 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>MERCADO LISTA</title>
     </head>
     <body>
-        <label>formulario de item</label>
-        <form action="http://127.0.0.1:8000/api/item/" method="post">
-            <input placeholder="nome do item" type="text" name="nome" required minlength="1" maxlength="50" />
-            <br>
-            <select name="marca" >
-                {% for marca in marcas %}
-                    <option value="{{ marca.id }}">{{ marca.nome }}</option>
-                {% endfor %}
-            </select>
-            <br/>
-            <input type="submit" value="enviar formulario" />
-        </form>
+
+        <br><a href="http://127.0.0.1:8000/criar_item" >Criar Item</a>
+        <br><a href="http://127.0.0.1:8000/criar_lista" >Criar Lista</a>
+        <br><a href="http://127.0.0.1:8000/criar_marca" >Marcas</a>
+        <br><a href="http://127.0.0.1:8000/cad_loja" >Lojas</a>
 
 
+
+<!--        <label>formulario de item</label>-->
+<!--        <form action="http://127.0.0.1:8000/api/item/" method="post">-->
+<!--            <input placeholder="nome do item" type="text" name="nome" required minlength="1" maxlength="50" />-->
+<!--            <br>-->
+<!--            <select name="marca" >-->
+<!--                {% for marca in marcas %}-->
+<!--                    <option value="{{ marca.id }}">{{ marca.nome }}</option>-->
+<!--                {% endfor %}-->
+<!--            </select>-->
+<!--            <br/>-->
+<!--            <input type="submit" value="enviar formulario" />-->
+<!--        </form>-->
 <!--        <p> fora do dormulario</p>-->
 <!--        <input type="button" value="pegar todo os itens" id="pegar_itens" />-->
 <!--        <br>-->

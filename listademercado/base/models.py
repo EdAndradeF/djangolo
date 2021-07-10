@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import forms
 
 
 class NamedModel(models.Model):
@@ -37,7 +38,6 @@ class Item(NamedModel):
     )
 
 
-
 class Marca(NamedModel):
     site = models.URLField(null=True)
     nacionalidade = models.CharField(           #caso nacional com?
@@ -61,3 +61,9 @@ class Loja(NamedModel):
     rua = models.CharField(max_length=60)   #busca por CEP
     num = models.IntegerField()
 
+
+# class User(forms.ModelForm):
+#     nick = models.CharField(max_length=15)
+#     email = models.EmailField(max_length=100)
+#     senha = forms.CharField(widget=forms.PasswordInput)
+    # todo add localidade e rever isso tudo ;P

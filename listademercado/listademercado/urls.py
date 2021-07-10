@@ -18,10 +18,14 @@ from django.urls import path, include
 from django.views.static import serve
 
 from . import settings
-from .lero import index
+from .paginas import index, criar_item, criar_lista, criar_marca, cad_loja
 
 urlpatterns = [
     path('', index),
+    path('criar_item', criar_item),
+    path('criar_lista', criar_lista),
+    path('criar_marca', criar_marca),
+    path('cad_loja', cad_loja),
     path('admin/', admin.site.urls),
     path('api/', include('base.urls')),
     path('user/', include('list.urls')),
