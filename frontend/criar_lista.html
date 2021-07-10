@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>NOVA LISTA</title>
+    </head>
+    <body>
+        <label>Criação de Lista</label>
+        <form action="http://127.0.0.1:8000/user/lista/" method="post">
+            <input placeholder="nome da Lista" type="text" name="nome" required minlength="1" maxlength="50" />
+            <br>
+            <select name="marca" >
+                {% for auth_user in auth_user %}
+                    <option value="{{ auth_user.id }}">{{ auth_user.id }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <input type="submit" value="enviar formulario" />
+
+        </form>
+    </body>
+    </html>

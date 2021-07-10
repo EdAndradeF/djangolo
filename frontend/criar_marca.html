@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <title>NOVA MARCA</title>
+    </head>
+    <body>
+        <label>Formulario de marca</label>
+        <form action="http://127.0.0.1:8000/api/marca/" method="post">
+            <input placeholder="nome da marca" type="text" name="nome" required minlength="1" maxlength="50" />
+            <br>
+            <input placeholder="site" type="url" name="site" minlength="1" maxlength="100" />
+            <br>
+            <input placeholder="Ex.:BR" type="text" name="pais" minlength="2" maxlength="3" />
+            <br>
+            <input placeholder="endereço" type="text" name="localidade" minlength="1" maxlength="100" />
+            <br>
+            <input type="submit" value="enviar formulario" />
+        </form>
+
+        <p> fora do dormulario</p>
+        <input type="button" value="pegar todo as marcas" id="pegar_marcas" />
+
+
+        <script>
+            $("#pegar_itens").click(function(){
+              $.get("http://127.0.0.1:8000/api/item", function(data){
+                console.log(
+                    "\nNome do item: " + data[0].nome +
+                    "\nNome do item: " + data[1].nome +
+                    "\nNome do item: " + data[2].nome
+                );
+              });
+            });
+
+            $("#pegar_marcas").click(function(){
+              $.get("http://127.0.0.1:8000/api/marca", function(data){
+                console.log(
+                    "\nNome da marca: " + data[0].nome +
+                    "\nNome da marca: " + data[1].nome
+                );
+              });
+            });
+        </script>
+    </body>
+</html>
